@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+
 /**
  * Базовая страница, инициализирующая для остальных работу с веб-драйвером;
  * Также реализует постусловие в resetAll(): происходит удаление введенных данных
@@ -22,6 +23,7 @@ public abstract class BasePage {
     public static void setDriver(WebDriver webDriver) {
         driver = webDriver;
     }
+
     public static boolean isElementVisible(WebElement webElement) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -33,8 +35,10 @@ public abstract class BasePage {
     }
 
     public static void resetAll() {
-        sandBox.click();
-        resetData.click();
+        if (isElementVisible(sandBox))
+            sandBox.click();
+        if (isElementVisible(resetData))
+            resetData.click();
         // Замедляла исключительно с целью наглядности выполнения
         try {
             Thread.sleep(1000L);

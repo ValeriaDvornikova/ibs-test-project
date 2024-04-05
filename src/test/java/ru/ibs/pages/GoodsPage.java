@@ -46,12 +46,15 @@ public class GoodsPage extends BasePage {
     }
 
     //Добавляем новый товар
-    public GoodsPage createNewGoods(String name) {
+    public void createNewGoods(String name) {
         // Проверка, что видна кнопка для добавления товара
         if (isElementVisible(addButton))
             addButton.click();
+        // Проверка, что при открытии формы видно поле с добавлением наименования
+        // (если оно видно, остальные поля тоже есть)
+        if (isElementVisible(nameForm))
+            nameForm.sendKeys(name);
 
-        nameForm.sendKeys(name);
         type.click();
         fruitType.click();
         checkBox.click();
@@ -65,7 +68,6 @@ public class GoodsPage extends BasePage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return this;
     }
 
     // Получаем лист с товарами и сравниваем с тем,

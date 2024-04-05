@@ -7,7 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.ibs.pages.BasePage;
 import ru.ibs.pages.ConfProp;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
+
 
 public abstract class BaseTest {
     protected static WebDriver driver;
@@ -17,8 +18,8 @@ public abstract class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         BasePage.setDriver(driver);
         driver.get(ConfProp.getProperty("base_url"));
     }
