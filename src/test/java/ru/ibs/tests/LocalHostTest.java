@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import ru.ibs.pages.GoodsPage;
 import ru.ibs.pages.MainPage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class LocalHostTest extends BaseTest {
     @Test
     public void checkPage() {
