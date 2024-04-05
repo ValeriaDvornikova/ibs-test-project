@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.ibs.pages.BasePage;
 import ru.ibs.pages.ConfProp;
-
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
