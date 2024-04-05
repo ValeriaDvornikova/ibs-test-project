@@ -4,6 +4,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Главная страница сайта, с которой происходит переход на страницу с товарами
+ */
+
 public class MainPage extends BasePage {
     private static MainPage INSTANCE;
     @FindBy(xpath = "//*[@data-toggle = 'dropdown']")
@@ -22,6 +26,7 @@ public class MainPage extends BasePage {
         return INSTANCE;
     }
 
+    // Действия по переходу с главной страницы на страницу с товарами
     public void switchToSandBox() {
         sandBox.click();
         goods.click();

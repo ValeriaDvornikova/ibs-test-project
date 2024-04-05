@@ -4,8 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Страница с таблицей товаров, на которой происходит добавление нового продукта
+ */
 public class GoodsPage extends BasePage {
     private static GoodsPage INSTANCE;
     @FindBy(xpath = "//*[@type = 'button' and text() = 'Добавить']")
@@ -40,6 +45,7 @@ public class GoodsPage extends BasePage {
         return INSTANCE;
     }
 
+    //Добавляем новый товар
     public GoodsPage createNewGoods(String name) {
         addButton.click();
         nameForm.sendKeys(name);
@@ -47,6 +53,7 @@ public class GoodsPage extends BasePage {
         fruitType.click();
         checkBox.click();
         saveButton.click();
+        // Замедляла исключительно с целью наглядности выполнения
         try {
             Thread.sleep(1500L);
         } catch (InterruptedException e) {
@@ -55,8 +62,15 @@ public class GoodsPage extends BasePage {
         return this;
     }
 
-    public String checkGoods() {
-        List <WebElement> newGoodsList = driver.findElements(By.xpath("//*[text()='5']/following-sibling::*"));
-        return newGoodsList.get(0).getText();
+    // Получаем лист с товарами и сравниваем с тем,
+    // что заранее задумывалось: Джекфрут, Фрукт, Экзотический(true)
+    public Boolean checkGoods() {
+        List<WebElement> newGoodsList =
+                driver.findElements(By.xpath("//*[text()='5']/following-sibling::*"));
+        List<String> productList = Arrays.asList("Джекфрут", "Фрукт", "true");
+        List<String> productListFromTable = Arrays.asList(newGoodsList.get(0).getText(),
+                newGoodsList.get(1).getText(),
+                newGoodsList.get(2).getText());
+        return productList.containsAll(productListFromTable);
     }
 }

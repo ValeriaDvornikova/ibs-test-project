@@ -3,6 +3,10 @@ package ru.ibs.pages;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+/**
+ * Класс для работы с Properties,
+ * помогает получить ссылку на стенд из файла
+ */
 public class ConfProp {
     public static FileInputStream fileInputStream;
     protected static Properties PROPERTIES;

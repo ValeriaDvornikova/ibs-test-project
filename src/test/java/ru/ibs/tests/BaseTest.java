@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 public abstract class BaseTest {
     protected static WebDriver driver;
 
-
     @BeforeEach
     public void setUp() {
         WebDriverManager.chromedriver().setup();
