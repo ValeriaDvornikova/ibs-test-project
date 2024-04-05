@@ -11,6 +11,7 @@ public class LocalHostTest extends BaseTest {
         String fruitName = "Джекфрут";
         MainPage.getInstance()
                 .switchToSandBox();
+        
         GoodsPage.getInstance()
                 .createNewGoods(fruitName);
         Assertions.assertTrue(GoodsPage.getInstance().checkGoods(), "Полученные данные неодинаковые!");

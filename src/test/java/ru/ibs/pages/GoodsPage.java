@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,12 +47,18 @@ public class GoodsPage extends BasePage {
 
     //Добавляем новый товар
     public GoodsPage createNewGoods(String name) {
-        addButton.click();
+        // Проверка, что видна кнопка для добавления товара
+        if (isElementVisible(addButton))
+            addButton.click();
+
         nameForm.sendKeys(name);
         type.click();
         fruitType.click();
         checkBox.click();
-        saveButton.click();
+        // Проверка, что видна кнопка для сохранения введенных данных
+        if (isElementVisible(saveButton))
+            saveButton.click();
+
         // Замедляла исключительно с целью наглядности выполнения
         try {
             Thread.sleep(1500L);
@@ -64,12 +71,16 @@ public class GoodsPage extends BasePage {
     // Получаем лист с товарами и сравниваем с тем,
     // что заранее задумывалось: Джекфрут, Фрукт, Экзотический(true)
     public Boolean checkGoods() {
-        List<WebElement> newGoodsList =
-                driver.findElements(By.xpath("//*[text()='5']/following-sibling::*"));
-        List<String> productList = Arrays.asList("Джекфрут", "Фрукт", "true");
-        List<String> productListFromTable = Arrays.asList(newGoodsList.get(0).getText(),
-                newGoodsList.get(1).getText(),
-                newGoodsList.get(2).getText());
-        return productList.containsAll(productListFromTable);
+        boolean result = false;
+        if (isElementVisible(newSandBoxLine)) {
+            List<WebElement> newGoodsList = driver.findElements
+                    (By.xpath("//*[text()='5']/following-sibling::*"));
+            List<String> productList = Arrays.asList("Джекфрут", "Фрукт", "true");
+            List<String> productListFromTable = Arrays.asList(newGoodsList.get(0).getText(),
+                    newGoodsList.get(1).getText(),
+                    newGoodsList.get(2).getText());
+            result = productList.containsAll(productListFromTable);
+        }
+        return result;
     }
 }
