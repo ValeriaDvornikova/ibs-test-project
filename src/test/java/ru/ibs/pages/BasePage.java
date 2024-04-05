@@ -13,7 +13,7 @@ import java.time.Duration;
  * Базовая страница, инициализирующая для остальных работу с веб-драйвером;
  * Также реализует постусловие в resetAll(): происходит удаление введенных данных
  */
-public abstract class BasePage {
+public class BasePage {
     protected static WebDriver driver;
     @FindBy(xpath = "//*[@data-toggle = 'dropdown']")
     private static WebElement sandBox;
