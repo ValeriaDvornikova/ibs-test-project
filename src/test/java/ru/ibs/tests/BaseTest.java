@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.ibs.pages.BasePage;
 import ru.ibs.pages.ConfProp;
+
 import java.time.Duration;
 
 
@@ -23,7 +24,6 @@ public abstract class BaseTest {
         BasePage.setDriver(driver);
         driver.get(ConfProp.getProperty("base_url"));
     }
-
     @AfterEach
     public void tearDown() {
         BasePage.resetAll();

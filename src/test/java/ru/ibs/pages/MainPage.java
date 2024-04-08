@@ -20,7 +20,6 @@ public class MainPage extends BasePage {
     private MainPage() {
         PageFactory.initElements(driver, this);
     }
-
     public static MainPage getInstance() {
         if (INSTANCE == null)
             INSTANCE = new MainPage();
@@ -29,9 +28,9 @@ public class MainPage extends BasePage {
 
     // Действия по переходу с главной страницы на страницу с товарами
     public void switchToSandBox() {
-        if (isElementVisible(sandBox))
+        if (isElementVisibleAndClickable(sandBox))
             sandBox.click();
-        if (isElementVisible(goods))
+        if (isElementVisibleAndClickable(goods))
             goods.click();
     }
 }

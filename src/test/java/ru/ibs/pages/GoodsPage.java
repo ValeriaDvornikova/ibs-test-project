@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class GoodsPage extends BasePage {
     @FindBy(xpath = "//*[text()='5']/following-sibling::*")
     private WebElement newSandBoxLine;
 
+    @FindBy(xpath = "//*[text()='4']/following-sibling::*")
+    private WebElement localValueOfTable;
 
     private GoodsPage() {
         PageFactory.initElements(driver, this);
@@ -48,18 +51,18 @@ public class GoodsPage extends BasePage {
     //Добавляем новый товар
     public void createNewGoods(String name) {
         // Проверка, что видна кнопка для добавления товара
-        if (isElementVisible(addButton))
+        if (isElementVisibleAndClickable(addButton))
             addButton.click();
         // Проверка, что при открытии формы видно поле с добавлением наименования
         // (если оно видно, остальные поля тоже есть)
-        if (isElementVisible(nameForm))
+        if (isElementVisibleAndClickable(nameForm))
             nameForm.sendKeys(name);
 
         type.click();
         fruitType.click();
         checkBox.click();
         // Проверка, что видна кнопка для сохранения введенных данных
-        if (isElementVisible(saveButton))
+        if (isElementVisibleAndClickable(saveButton))
             saveButton.click();
 
         // Замедляла исключительно с целью наглядности выполнения
@@ -72,17 +75,23 @@ public class GoodsPage extends BasePage {
 
     // Получаем лист с товарами и сравниваем с тем,
     // что заранее задумывалось: Джекфрут, Фрукт, Экзотический(true)
-    public Boolean checkGoods() {
-        boolean result = false;
-        if (isElementVisible(newSandBoxLine)) {
+    public List<String> checkGoods() {
+        List<String> result = new ArrayList<>();
+        if (isElementVisibleAndClickable(newSandBoxLine)) {
             List<WebElement> newGoodsList = driver.findElements
                     (By.xpath("//*[text()='5']/following-sibling::*"));
-            List<String> productList = Arrays.asList("Джекфрут", "Фрукт", "true");
-            List<String> productListFromTable = Arrays.asList(newGoodsList.get(0).getText(),
+            result = Arrays.asList(newGoodsList.get(0).getText(),
                     newGoodsList.get(1).getText(),
                     newGoodsList.get(2).getText());
-            result = productList.containsAll(productListFromTable);
         }
         return result;
+    }
+
+    public List<String> lastValueInTheTable() {
+        List<WebElement> goodsList = driver.findElements
+                (By.xpath("//*[text()='4']/following-sibling::*"));
+        return Arrays.asList(goodsList.get(0).getText(),
+                goodsList.get(1).getText(),
+                goodsList.get(2).getText());
     }
 }
