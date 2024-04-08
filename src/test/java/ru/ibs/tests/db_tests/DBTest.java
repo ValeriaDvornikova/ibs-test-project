@@ -4,6 +4,8 @@ package ru.ibs.tests.db_tests;
 import org.junit.jupiter.api.*;
 
 import java.sql.*;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,10 +31,14 @@ public class DBTest extends BaseDbTest {
         String addRequest = "INSERT INTO FOOD (FOOD_NAME, FOOD_TYPE, FOOD_EXOTIC) " +
                 "VALUES (?, ?, ?);";
         String deleteRequest = "DELETE FROM FOOD WHERE FOOD_NAME = 'Ананас'";
-        
+
         // Добавление записи в БД
         Statement statement = connection.createStatement();
-        statement.executeQuery(query);
+        ResultSet set = statement.executeQuery(query);
+        set.first();
+        do {
+            assertNotEquals("Ананас", set.getString("FOOD_NAME"));
+        } while (set.next());
 
         PreparedStatement add = connection.prepareStatement(addRequest);
         add.setString(1, "Ананас");
