@@ -24,7 +24,7 @@ public class LocalHostTest extends BaseTest {
 
         Assertions.assertAll("Проверки добавления и удаления товара",
                 // Проверка добавления строки
-                () -> Assertions.assertEquals(productList,GoodsPage.getInstance().checkGoods(),
+                () -> Assertions.assertEquals(productList, GoodsPage.getInstance().checkGoods(),
                         "Полученные данные неодинаковые!"),
                 // Проверка удаления строки
                 () -> Assertions.assertNotEquals(productList, GoodsPage.getInstance().lastValueInTheTable(),

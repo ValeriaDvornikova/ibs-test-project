@@ -20,6 +20,7 @@ public class MainPage extends BasePage {
     private MainPage() {
         PageFactory.initElements(driver, this);
     }
+
     public static MainPage getInstance() {
         if (INSTANCE == null)
             INSTANCE = new MainPage();
