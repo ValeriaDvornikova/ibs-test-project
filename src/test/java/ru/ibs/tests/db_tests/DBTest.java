@@ -36,6 +36,7 @@ public class DBTest extends BaseDbTest {
         Statement statement = connection.createStatement();
         ResultSet set = statement.executeQuery(query);
         set.first();
+        // Проверка, что такого товара нет
         do {
             assertNotEquals("Ананас", set.getString("FOOD_NAME"));
         } while (set.next());
