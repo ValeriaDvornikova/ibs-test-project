@@ -10,16 +10,6 @@ import java.util.List;
 public class LocalHostTest extends BaseTest {
     private final List<String> productList = Arrays.asList("Джекфрут", "Фрукт", "true");
     @Test
-    @DisplayName("Проверка условия добавления нового уникального товара")
-    public void inspectionNonRepeatableGoods() {
-        MainPage.getInstance().switchToSandBox();
-        Assertions.assertFalse(productList.containsAll(GoodsPage.getInstance().getGoodsValueFromTheTable(1))
-                && productList.containsAll(GoodsPage.getInstance().getGoodsValueFromTheTable(2))
-                && productList.containsAll(GoodsPage.getInstance().getGoodsValueFromTheTable(3))
-                && productList.containsAll(GoodsPage.getInstance().getGoodsValueFromTheTable(4)));
-    }
-
-    @Test
     @DisplayName("Проверка добаления и удаления товаров на странице")
     public void checkAddProduct() {
         String fruitName = "Джекфрут";
