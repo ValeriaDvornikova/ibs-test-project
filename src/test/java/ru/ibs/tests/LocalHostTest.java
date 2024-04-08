@@ -30,5 +30,4 @@ public class LocalHostTest extends BaseTest {
                 () -> Assertions.assertNotEquals(productList, GoodsPage.getInstance().lastValueInTheTable(),
                         "Полученные данные одинаковые"));
     }
-
 }

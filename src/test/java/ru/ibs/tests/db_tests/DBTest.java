@@ -2,7 +2,6 @@ package ru.ibs.tests.db_tests;
 
 
 import org.junit.jupiter.api.*;
-import ru.ibs.tests.db_tests.BaseDbTest;
 
 import java.sql.*;
 
@@ -49,7 +48,6 @@ public class DBTest extends BaseDbTest {
                 () -> assertEquals(afterUpdSelectResult.getString("FOOD_TYPE"), "FRUIT"),
                 () -> assertEquals(afterUpdSelectResult.getInt("FOOD_EXOTIC"), 1)
         );
-
 
         // Удаление записи из БД
         statement.execute(deleteRequest);
