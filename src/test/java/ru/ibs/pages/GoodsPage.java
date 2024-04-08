@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,8 +35,10 @@ public class GoodsPage extends BasePage {
     @FindBy(xpath = "//*[text()='5']/following-sibling::*")
     private WebElement newSandBoxLine;
 
-    @FindBy(xpath = "//*[text()='4']/following-sibling::*")
-    private WebElement localValueOfTable;
+    @FindBy(xpath = "//*[@data-toggle = 'dropdown']")
+    private static WebElement sandBox;
+    @FindBy(xpath = "//*[@id = 'reset']")
+    private static WebElement resetData;
 
     private GoodsPage() {
         PageFactory.initElements(driver, this);
@@ -78,22 +78,34 @@ public class GoodsPage extends BasePage {
     // Получаем лист с товарами и сравниваем с тем,
     // что заранее задумывалось: Джекфрут, Фрукт, Экзотический(true)
     public List<String> checkGoods() {
-        List<String> result = new ArrayList<>();
+        List<String> newGoodsList = new ArrayList<>();
         if (isElementVisibleAndClickable(newSandBoxLine)) {
-            List<WebElement> newGoodsList = driver.findElements
-                    (By.xpath("//*[text()='5']/following-sibling::*"));
-            result = Arrays.asList(newGoodsList.get(0).getText(),
-                    newGoodsList.get(1).getText(),
-                    newGoodsList.get(2).getText());
+            newGoodsList = getGoodsValueFromTheTable(5);
         }
-        return result;
+        return newGoodsList;
     }
 
-    public List<String> lastValueInTheTable() {
+    // Создание листов со значениями товара для проверки
+    public List<String> getGoodsValueFromTheTable(int number) {
         List<WebElement> goodsList = driver.findElements
-                (By.xpath("//*[text()='4']/following-sibling::*"));
+                (By.xpath("//*[text()='" + number + "']/following-sibling::*"));
         return Arrays.asList(goodsList.get(0).getText(),
                 goodsList.get(1).getText(),
                 goodsList.get(2).getText());
     }
+
+    // Постусловие: удаляем введенные данные
+    public static void resetAll() {
+        if (isElementVisibleAndClickable(sandBox))
+            sandBox.click();
+        if (isElementVisibleAndClickable(resetData))
+            resetData.click();
+        // Замедляла исключительно с целью наглядности выполнения
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

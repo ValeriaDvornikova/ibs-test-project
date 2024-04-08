@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Главная страница сайта, с которой происходит переход на страницу с товарами
  */
-
 public class MainPage extends BasePage {
     private static MainPage INSTANCE;
     @FindBy(xpath = "//*[@data-toggle = 'dropdown']")
@@ -33,4 +32,5 @@ public class MainPage extends BasePage {
         if (isElementVisibleAndClickable(goods))
             goods.click();
     }
+
 }

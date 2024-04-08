@@ -1,8 +1,6 @@
 package ru.ibs.tests;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ru.ibs.pages.GoodsPage;
 import ru.ibs.pages.MainPage;
 
@@ -10,24 +8,29 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LocalHostTest extends BaseTest {
+    private final List<String> productList = Arrays.asList("Джекфрут", "Фрукт", "true");
+    @Test
+    @DisplayName("Проверка условия добавления нового уникального товара")
+    public void inspectionNonRepeatableGoods() {
+        MainPage.getInstance().switchToSandBox();
+        Assertions.assertFalse(productList.containsAll(GoodsPage.getInstance().getGoodsValueFromTheTable(1))
+                && productList.containsAll(GoodsPage.getInstance().getGoodsValueFromTheTable(2))
+                && productList.containsAll(GoodsPage.getInstance().getGoodsValueFromTheTable(3))
+                && productList.containsAll(GoodsPage.getInstance().getGoodsValueFromTheTable(4)));
+    }
+
     @Test
     @DisplayName("Проверка добаления и удаления товаров на странице")
     public void checkAddProduct() {
         String fruitName = "Джекфрут";
         MainPage.getInstance()
                 .switchToSandBox();
-
         GoodsPage.getInstance()
                 .createNewGoods(fruitName);
-
-        List<String> productList = Arrays.asList("Джекфрут", "Фрукт", "true");
-
-        Assertions.assertAll("Проверки добавления и удаления товара",
-                // Проверка добавления строки
-                () -> Assertions.assertEquals(productList, GoodsPage.getInstance().checkGoods(),
-                        "Полученные данные неодинаковые!"),
-                // Проверка удаления строки
-                () -> Assertions.assertNotEquals(productList, GoodsPage.getInstance().lastValueInTheTable(),
-                        "Полученные данные одинаковые"));
+        Assertions.assertEquals(productList, GoodsPage.getInstance().checkGoods(),
+                "Полученные данные неодинаковые: товар не добавился");
+        GoodsPage.resetAll();
+        Assertions.assertNotEquals(productList, GoodsPage.getInstance().getGoodsValueFromTheTable(4),
+                "Полученные данные одинаковые: товар не удален");
     }
 }

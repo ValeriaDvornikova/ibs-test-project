@@ -1,8 +1,8 @@
 package ru.ibs.tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.ibs.pages.BasePage;
@@ -14,8 +14,8 @@ import java.time.Duration;
 public abstract class BaseTest {
     protected static WebDriver driver;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -25,9 +25,8 @@ public abstract class BaseTest {
         driver.get(ConfProp.getProperty("base_url"));
     }
 
-    @AfterEach
-    public void tearDown() {
-        BasePage.resetAll();
+    @AfterAll
+    public static void tearDown() {
         driver.close();
         driver.quit();
     }

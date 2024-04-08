@@ -13,7 +13,7 @@ public class DBTest extends BaseDbTest {
      * Проверка, что соединение с БД установлено
      */
     @Test
-    @DisplayName("Проврека подключения к БД")
+    @DisplayName("Проверка подключения к БД")
     public void shouldGetJdbcConnection() throws SQLException {
         assertTrue(connection.isValid(1), "Подключения нет");
         assertFalse(connection.isClosed(), "Подключение открыто");
@@ -24,16 +24,16 @@ public class DBTest extends BaseDbTest {
      */
     @Test
     @DisplayName("Проверка добавления и удаления товара в БД")
-
     public void dbTest() throws SQLException {
         String query = "SELECT * FROM FOOD;";
         String addRequest = "INSERT INTO FOOD (FOOD_NAME, FOOD_TYPE, FOOD_EXOTIC) " +
                 "VALUES (?, ?, ?);";
         String deleteRequest = "DELETE FROM FOOD WHERE FOOD_NAME = 'Ананас'";
-
+        
         // Добавление записи в БД
         Statement statement = connection.createStatement();
         statement.executeQuery(query);
+
         PreparedStatement add = connection.prepareStatement(addRequest);
         add.setString(1, "Ананас");
         add.setString(2, "FRUIT");

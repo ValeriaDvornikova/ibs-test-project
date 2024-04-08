@@ -3,7 +3,6 @@ package ru.ibs.pages;
 import lombok.Setter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,10 +17,6 @@ public class BasePage {
 
     @Setter
     protected static WebDriver driver;
-    @FindBy(xpath = "//*[@data-toggle = 'dropdown']")
-    private static WebElement sandBox;
-    @FindBy(xpath = "//*[@id = 'reset']")
-    private static WebElement resetData;
 
     //Проверка, что элемент кликабелен и виден
     public static boolean isElementVisibleAndClickable(WebElement webElement) {
@@ -32,19 +27,6 @@ public class BasePage {
             return true;
         } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;
-        }
-    }
-
-    public static void resetAll() {
-        if (isElementVisibleAndClickable(sandBox))
-            sandBox.click();
-        if (isElementVisibleAndClickable(resetData))
-            resetData.click();
-        // Замедляла исключительно с целью наглядности выполнения
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 }
