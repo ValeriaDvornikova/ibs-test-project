@@ -29,6 +29,9 @@ public class MainPage extends BasePage {
     public void switchToSandBox() {
         if (isElementVisibleAndClickable(sandBox))
             sandBox.click();
+    }
+    public void goodsButtonClick(){
+
         if (isElementVisibleAndClickable(goods))
             goods.click();
     }

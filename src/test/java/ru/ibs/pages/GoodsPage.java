@@ -51,22 +51,34 @@ public class GoodsPage extends BasePage {
     }
 
     //Добавляем новый товар
-    public void createNewGoods(String name) {
+    public GoodsPage clickAddButton() {
         // Проверка, что видна кнопка для добавления товара
         if (isElementVisibleAndClickable(addButton))
             addButton.click();
-        // Проверка, что при открытии формы видно поле с добавлением наименования
-        // (если оно видно, остальные поля тоже есть)
-        if (isElementVisibleAndClickable(nameForm))
-            nameForm.sendKeys(name);
+        return this;
+    }
 
+    public GoodsPage enterFruitName(String fruitName) {
+        if (isElementVisibleAndClickable(nameForm))
+            nameForm.sendKeys(fruitName);
+        return this;
+    }
+
+    public GoodsPage checkType() {
         type.click();
         fruitType.click();
+        return this;
+    }
+
+    public GoodsPage checkBoxClick() {
         checkBox.click();
+        return this;
+    }
+
+    public void saveButtonClick() {
         // Проверка, что видна кнопка для сохранения введенных данных
         if (isElementVisibleAndClickable(saveButton))
             saveButton.click();
-
         // Замедляла исключительно с целью наглядности выполнения
         try {
             Thread.sleep(1500L);
@@ -107,5 +119,4 @@ public class GoodsPage extends BasePage {
             throw new RuntimeException(e);
         }
     }
-
 }

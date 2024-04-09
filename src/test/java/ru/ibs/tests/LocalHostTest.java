@@ -16,7 +16,11 @@ public class LocalHostTest extends BaseTest {
         MainPage.getInstance()
                 .switchToSandBox();
         GoodsPage.getInstance()
-                .createNewGoods(fruitName);
+                .clickAddButton()
+                .enterFruitName(fruitName)
+                .checkType()
+                .checkBoxClick()
+                .saveButtonClick();
         Assertions.assertEquals(productList, GoodsPage.getInstance().checkGoods(),
                 "Полученные данные неодинаковые: товар не добавился");
         GoodsPage.resetAll();
