@@ -26,12 +26,12 @@ public class MainPage extends BasePage {
     }
 
     // Действия по переходу с главной страницы на страницу с товарами
-    public void switchToSandBox() {
+    public MainPage switchToSandBox() {
         if (isElementVisibleAndClickable(sandBox))
             sandBox.click();
+        return this;
     }
-    public void goodsButtonClick(){
-
+    public void goodsButtonClick() {
         if (isElementVisibleAndClickable(goods))
             goods.click();
     }

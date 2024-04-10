@@ -14,7 +14,8 @@ public class LocalHostTest extends BaseTest {
     public void checkAddProduct() {
         String fruitName = "Джекфрут";
         MainPage.getInstance()
-                .switchToSandBox();
+                .switchToSandBox()
+                .goodsButtonClick();
         GoodsPage.getInstance()
                 .clickAddButton()
                 .enterFruitName(fruitName)
