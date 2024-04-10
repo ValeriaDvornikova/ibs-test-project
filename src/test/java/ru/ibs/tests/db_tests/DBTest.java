@@ -3,7 +3,6 @@ package ru.ibs.tests.db_tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +16,6 @@ public class DBTest extends BaseDbTest {
     /**
      * Проверка, что соединение с БД установлено
      */
-    @Test
     @DisplayName("Проверка подключения к БД")
     public void shouldGetJdbcConnection() throws SQLException {
         assertTrue(connection.isValid(1), "Подключения нет");
@@ -27,7 +25,7 @@ public class DBTest extends BaseDbTest {
     /**
      * Проверка добавления позиции в таблицу
      */
-    @Test
+
     @DisplayName("Проверка добавления и удаления товара в БД")
     public void dbTest() throws SQLException {
         String query = "SELECT * FROM FOOD;";

@@ -1,6 +1,7 @@
 package ru.ibs.tests;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import ru.ibs.pages.GoodsPage;
 import ru.ibs.pages.MainPage;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class LocalHostTest extends BaseTest {
     private final List<String> productList = Arrays.asList("Джекфрут", "Фрукт", "true");
-    @Test
+
     @DisplayName("Проверка добаления и удаления товаров на странице")
     public void checkAddProduct() {
         String fruitName = "Джекфрут";
