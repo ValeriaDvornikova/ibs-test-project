@@ -12,6 +12,7 @@ import java.util.List;
 
 public class UISteps {
     private final List<String> productList = Arrays.asList("Джекфрут", "Фрукт", "true");
+
     @Given("Открываем сайт")
     public void init() {
         BaseTest.setUp();
