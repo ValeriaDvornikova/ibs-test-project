@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DBSteps {
 
     private static final String QUERY = "SELECT * FROM FOOD;";
-    private static final String PIN_QUERY = "SELECT * FROM FOOD WHERE FOOD_NAME = 'Ананас';";
+    private static final String PIN_QUERY = "SELECT * FROM FOOD WHERE FOOD_NAME = ?;";
     private static Connection connection;
     private static final String ADD_REQUEST = "INSERT INTO FOOD (FOOD_NAME, FOOD_TYPE, FOOD_EXOTIC) " +
             "VALUES (?, ?, ?);";
@@ -33,8 +33,9 @@ public class DBSteps {
 
     @Given("Проверяем, что добавляем в БД уникальный новый товар")
     public void checkNewGood() throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet set = statement.executeQuery(PIN_QUERY);
+        PreparedStatement preparedStatement = connection.prepareStatement(PIN_QUERY);
+        preparedStatement.setString(1, "Ананас");
+        ResultSet set = preparedStatement.executeQuery();
         set.first();
         Assertions.assertThrows(JdbcSQLNonTransientException.class, () -> set.getString("FOOD_NAME"));
     }
